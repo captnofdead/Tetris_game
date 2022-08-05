@@ -22,7 +22,7 @@ sly
 ````
 
 ## Run
-Run the makefile that will compile all the files and execute the game with the following command:
+Run the makefile that will compile all the files and execute the game with the following command "\n"
 NOTE: Your code should be in cclang_script.txt to compile successfully.
 ````
 $ make
