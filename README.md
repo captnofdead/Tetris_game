@@ -2,7 +2,7 @@
 
 Tetris Assignment of Group 34 - BINGPOT
 
-Our language is called 'CCLang'. Snippet of CClang is shown below. User can set the values as per his/her choice in the gglmao.txt file.
+The language is called 'CCLang'. Snippet of CClang is shown below. User can set the values as per his/her choice in the gglmao.txt file.
 
 ```
 BOARD : 10 10
