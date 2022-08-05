@@ -2,7 +2,7 @@
 
 Tetris Game Language.
 
-The language is called 'CCLang'. Snippet of CClang is shown below. User can set the values as per his/her choice in the gglmao.txt file.
+The language is called 'CCLang'. Snippet of CClang is shown below. User can set the values as per his/her choice in the cclang_script.txt file.
 
 ```
 BOARD : 10 10
