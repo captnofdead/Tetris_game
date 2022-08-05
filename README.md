@@ -28,6 +28,6 @@ NOTE: Your code should be in cclang_script.txt to compile successfully.
 $ make
 ````
 
-## 🔗 Links
+## Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhairyagrawal/)
 
