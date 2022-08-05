@@ -1,6 +1,6 @@
 # Tetris
 
-Tetris Assignment of Group 34 - BINGPOT
+Tetris Game Language.
 
 The language is called 'CCLang'. Snippet of CClang is shown below. User can set the values as per his/her choice in the gglmao.txt file.
 
@@ -28,4 +28,6 @@ NOTE: Your code should be in cclang_script.txt to compile successfully.
 $ make
 ````
 
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhairyagrawal/)
 
