@@ -1,0 +1,1147 @@
+Grammar:
+
+Rule 0     S' -> Section
+Rule 1     Section -> FUNCTION COLON EXPR5 NEWLINE
+Rule 2     Section -> ACTION COLON EXPR4 NEWLINE
+Rule 3     Section -> PIECE COLON EXPR3
+Rule 4     Section -> CONTROLS COLON EXPR2
+Rule 5     Section -> BOARD COLON EXPR1
+Rule 6     EXPR1 -> NUMBER NUMBER NEWLINE
+Rule 7     EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE
+Rule 8     EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+Rule 9     GAME_CONTROLS -> INIT_BOARD
+Rule 10    GAME_CONTROLS -> SCORE
+Rule 11    GAME_CONTROLS -> HORIZON
+Rule 12    GAME_CONTROLS -> ORIENTATION
+Rule 13    GAME_CONTROLS -> SPEED_CONTROL
+Rule 14    GAME_CONTROLS -> KEY_CONTROL
+Rule 15    GAME_CONTROLS -> GAME_MODE
+Rule 16    CONSTANT -> _1_optional
+Rule 17    _1_optional -> STRING
+Rule 18    _1_optional -> <empty>
+Rule 19    CONSTANT -> KEY_CONTROL
+Rule 20    CONSTANT -> KEY_CONSTANTS
+Rule 21    CONSTANT -> ID
+Rule 22    CONSTANT -> STRING
+Rule 23    CONSTANT -> NUMBER
+Rule 24    EXPR3 -> PIECE_ID EQUAL _2_optional
+Rule 25    _2_optional -> STRING
+Rule 26    _2_optional -> <empty>
+Rule 27    EXPR3 -> PIECE_ID EQUAL _3_optional COMMA EXPR3
+Rule 28    _3_optional -> STRING
+Rule 29    _3_optional -> <empty>
+Rule 30    EXPR3 -> PIECE_ID NEWLINE
+Rule 31    EXPR3 -> PIECE_ID COMMA EXPR3
+Rule 32    EXPR4 -> empty
+Rule 33    EXPR5 -> empty
+Rule 34    EXPR5 -> PROCEDURE NEWLINE EXPR5
+Rule 35    PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+Rule 36    F_ARGS -> EXPR2
+Rule 37    FBODY -> RETURN
+Rule 38    FBODY -> ID EQUAL BEXPR
+Rule 39    FBODY -> ID EQUAL AEXPR
+Rule 40    FBODY -> BREAK
+Rule 41    FBODY -> CONTINUE
+Rule 42    FBODY -> EXPR2 NEWLINE FBODY
+Rule 43    AEXPR -> term
+Rule 44    AEXPR -> AEXPR MINUS term  [precedence=left, level=1]
+Rule 45    AEXPR -> AEXPR PLUS term  [precedence=left, level=1]
+Rule 46    term -> factor
+Rule 47    term -> term COMPARISON factor
+Rule 48    term -> term MOD factor
+Rule 49    term -> term DIVIDE factor  [precedence=left, level=2]
+Rule 50    term -> term MULTIPLY factor  [precedence=left, level=2]
+Rule 51    factor -> LEFT_PAR AEXPR RIGHT_PAR
+Rule 52    factor -> NUMBER
+Rule 53    BEXPR -> OFF
+Rule 54    BEXPR -> ON
+Rule 55    BEXPR -> ID BOOL_OP ID
+Rule 56    BEXPR -> NOT ID
+Rule 57    BOOL_OP -> OR
+Rule 58    BOOL_OP -> AND
+Rule 59    empty -> <empty>
+
+Unused terminals:
+
+    LETTER
+    FOR
+    CHARACTR
+    ELSE
+    WHILE
+    DIGIT
+    WHITESPACE
+    IF
+    COMMENTS
+
+Terminals, with rules where they appear:
+
+ACTION               : 2
+AND                  : 58
+BOARD                : 5
+BREAK                : 40
+CHARACTR             : 
+COLON                : 1 2 3 4 5
+COMMA                : 27 31
+COMMENTS             : 
+COMPARISON           : 47
+CONTINUE             : 41
+CONTROLS             : 4
+DEF                  : 35
+DIGIT                : 
+DIVIDE               : 49
+ELSE                 : 
+EQUAL                : 7 8 24 27 38 39
+FOR                  : 
+FUNCTION             : 1
+GAME_MODE            : 15
+HORIZON              : 11
+ID                   : 21 35 38 39 55 55 56
+IF                   : 
+INIT_BOARD           : 9
+KEY_CONSTANTS        : 20
+KEY_CONTROL          : 14 19
+LEFT_CPAR            : 35
+LEFT_PAR             : 35 51
+LETTER               : 
+MINUS                : 44
+MOD                  : 48
+MULTIPLY             : 50
+NEWLINE              : 1 2 6 7 8 8 30 34 35 35 42
+NOT                  : 56
+NUMBER               : 6 6 23 52
+OFF                  : 53
+ON                   : 54
+OR                   : 57
+ORIENTATION          : 12
+PIECE                : 3
+PIECE_ID             : 24 27 30 31
+PLUS                 : 45
+RETURN               : 37
+RIGHT_CPAR           : 35
+RIGHT_PAR            : 35 51
+SCORE                : 10
+SPEED_CONTROL        : 13
+STRING               : 17 22 25 28
+WHILE                : 
+WHITESPACE           : 
+error                : 
+
+Nonterminals, with rules where they appear:
+
+AEXPR                : 39 44 45 51
+BEXPR                : 38
+BOOL_OP              : 55
+CONSTANT             : 7 8
+EXPR1                : 5
+EXPR2                : 4 8 36 42
+EXPR3                : 3 27 31
+EXPR4                : 2
+EXPR5                : 1 34
+FBODY                : 35 42
+F_ARGS               : 35
+GAME_CONTROLS        : 7 8
+PROCEDURE            : 34
+Section              : 0
+_1_optional          : 16
+_2_optional          : 24
+_3_optional          : 27
+empty                : 32 33
+factor               : 46 47 48 49 50
+term                 : 43 44 45 47 48 49 50
+
+
+state 0
+
+    (0) S' -> . Section
+    (1) Section -> . FUNCTION COLON EXPR5 NEWLINE
+    (2) Section -> . ACTION COLON EXPR4 NEWLINE
+    (3) Section -> . PIECE COLON EXPR3
+    (4) Section -> . CONTROLS COLON EXPR2
+    (5) Section -> . BOARD COLON EXPR1
+    FUNCTION        shift and go to state 2
+    ACTION          shift and go to state 3
+    PIECE           shift and go to state 4
+    CONTROLS        shift and go to state 5
+    BOARD           shift and go to state 6
+
+    Section                        shift and go to state 1
+
+state 1
+
+    (0) S' -> Section .
+
+
+state 2
+
+    (1) Section -> FUNCTION . COLON EXPR5 NEWLINE
+    COLON           shift and go to state 7
+
+
+state 3
+
+    (2) Section -> ACTION . COLON EXPR4 NEWLINE
+    COLON           shift and go to state 8
+
+
+state 4
+
+    (3) Section -> PIECE . COLON EXPR3
+    COLON           shift and go to state 9
+
+
+state 5
+
+    (4) Section -> CONTROLS . COLON EXPR2
+    COLON           shift and go to state 10
+
+
+state 6
+
+    (5) Section -> BOARD . COLON EXPR1
+    COLON           shift and go to state 11
+
+
+state 7
+
+    (1) Section -> FUNCTION COLON . EXPR5 NEWLINE
+    (33) EXPR5 -> . empty
+    (34) EXPR5 -> . PROCEDURE NEWLINE EXPR5
+    (59) empty -> .
+    (35) PROCEDURE -> . DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    NEWLINE         reduce using rule 59 (empty -> .)
+    DEF             shift and go to state 15
+
+    EXPR5                          shift and go to state 12
+    empty                          shift and go to state 13
+    PROCEDURE                      shift and go to state 14
+
+state 8
+
+    (2) Section -> ACTION COLON . EXPR4 NEWLINE
+    (32) EXPR4 -> . empty
+    (59) empty -> .
+    NEWLINE         reduce using rule 59 (empty -> .)
+
+    EXPR4                          shift and go to state 16
+    empty                          shift and go to state 17
+
+state 9
+
+    (3) Section -> PIECE COLON . EXPR3
+    (24) EXPR3 -> . PIECE_ID EQUAL _2_optional
+    (27) EXPR3 -> . PIECE_ID EQUAL _3_optional COMMA EXPR3
+    (30) EXPR3 -> . PIECE_ID NEWLINE
+    (31) EXPR3 -> . PIECE_ID COMMA EXPR3
+    PIECE_ID        shift and go to state 19
+
+    EXPR3                          shift and go to state 18
+
+state 10
+
+    (4) Section -> CONTROLS COLON . EXPR2
+    (7) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    (9) GAME_CONTROLS -> . INIT_BOARD
+    (10) GAME_CONTROLS -> . SCORE
+    (11) GAME_CONTROLS -> . HORIZON
+    (12) GAME_CONTROLS -> . ORIENTATION
+    (13) GAME_CONTROLS -> . SPEED_CONTROL
+    (14) GAME_CONTROLS -> . KEY_CONTROL
+    (15) GAME_CONTROLS -> . GAME_MODE
+    INIT_BOARD      shift and go to state 22
+    SCORE           shift and go to state 23
+    HORIZON         shift and go to state 24
+    ORIENTATION     shift and go to state 25
+    SPEED_CONTROL   shift and go to state 26
+    KEY_CONTROL     shift and go to state 27
+    GAME_MODE       shift and go to state 28
+
+    EXPR2                          shift and go to state 20
+    GAME_CONTROLS                  shift and go to state 21
+
+state 11
+
+    (5) Section -> BOARD COLON . EXPR1
+    (6) EXPR1 -> . NUMBER NUMBER NEWLINE
+    NUMBER          shift and go to state 30
+
+    EXPR1                          shift and go to state 29
+
+state 12
+
+    (1) Section -> FUNCTION COLON EXPR5 . NEWLINE
+    NEWLINE         shift and go to state 31
+
+
+state 13
+
+    (33) EXPR5 -> empty .
+    NEWLINE         reduce using rule 33 (EXPR5 -> empty .)
+
+
+state 14
+
+    (34) EXPR5 -> PROCEDURE . NEWLINE EXPR5
+    NEWLINE         shift and go to state 32
+
+
+state 15
+
+    (35) PROCEDURE -> DEF . ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    ID              shift and go to state 33
+
+
+state 16
+
+    (2) Section -> ACTION COLON EXPR4 . NEWLINE
+    NEWLINE         shift and go to state 34
+
+
+state 17
+
+    (32) EXPR4 -> empty .
+    NEWLINE         reduce using rule 32 (EXPR4 -> empty .)
+
+
+state 18
+
+    (3) Section -> PIECE COLON EXPR3 .
+    $end            reduce using rule 3 (Section -> PIECE COLON EXPR3 .)
+
+
+state 19
+
+    (24) EXPR3 -> PIECE_ID . EQUAL _2_optional
+    (27) EXPR3 -> PIECE_ID . EQUAL _3_optional COMMA EXPR3
+    (30) EXPR3 -> PIECE_ID . NEWLINE
+    (31) EXPR3 -> PIECE_ID . COMMA EXPR3
+    EQUAL           shift and go to state 35
+    NEWLINE         shift and go to state 37
+    COMMA           shift and go to state 36
+
+
+state 20
+
+    (4) Section -> CONTROLS COLON EXPR2 .
+    $end            reduce using rule 4 (Section -> CONTROLS COLON EXPR2 .)
+
+
+state 21
+
+    (7) EXPR2 -> GAME_CONTROLS . EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> GAME_CONTROLS . EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    EQUAL           shift and go to state 38
+
+
+state 22
+
+    (9) GAME_CONTROLS -> INIT_BOARD .
+    EQUAL           reduce using rule 9 (GAME_CONTROLS -> INIT_BOARD .)
+
+
+state 23
+
+    (10) GAME_CONTROLS -> SCORE .
+    EQUAL           reduce using rule 10 (GAME_CONTROLS -> SCORE .)
+
+
+state 24
+
+    (11) GAME_CONTROLS -> HORIZON .
+    EQUAL           reduce using rule 11 (GAME_CONTROLS -> HORIZON .)
+
+
+state 25
+
+    (12) GAME_CONTROLS -> ORIENTATION .
+    EQUAL           reduce using rule 12 (GAME_CONTROLS -> ORIENTATION .)
+
+
+state 26
+
+    (13) GAME_CONTROLS -> SPEED_CONTROL .
+    EQUAL           reduce using rule 13 (GAME_CONTROLS -> SPEED_CONTROL .)
+
+
+state 27
+
+    (14) GAME_CONTROLS -> KEY_CONTROL .
+    EQUAL           reduce using rule 14 (GAME_CONTROLS -> KEY_CONTROL .)
+
+
+state 28
+
+    (15) GAME_CONTROLS -> GAME_MODE .
+    EQUAL           reduce using rule 15 (GAME_CONTROLS -> GAME_MODE .)
+
+
+state 29
+
+    (5) Section -> BOARD COLON EXPR1 .
+    $end            reduce using rule 5 (Section -> BOARD COLON EXPR1 .)
+
+
+state 30
+
+    (6) EXPR1 -> NUMBER . NUMBER NEWLINE
+    NUMBER          shift and go to state 39
+
+
+state 31
+
+    (1) Section -> FUNCTION COLON EXPR5 NEWLINE .
+    $end            reduce using rule 1 (Section -> FUNCTION COLON EXPR5 NEWLINE .)
+
+
+state 32
+
+    (34) EXPR5 -> PROCEDURE NEWLINE . EXPR5
+    (33) EXPR5 -> . empty
+    (34) EXPR5 -> . PROCEDURE NEWLINE EXPR5
+    (59) empty -> .
+    (35) PROCEDURE -> . DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    NEWLINE         reduce using rule 59 (empty -> .)
+    DEF             shift and go to state 15
+
+    PROCEDURE                      shift and go to state 14
+    EXPR5                          shift and go to state 40
+    empty                          shift and go to state 13
+
+state 33
+
+    (35) PROCEDURE -> DEF ID . LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    LEFT_PAR        shift and go to state 41
+
+
+state 34
+
+    (2) Section -> ACTION COLON EXPR4 NEWLINE .
+    $end            reduce using rule 2 (Section -> ACTION COLON EXPR4 NEWLINE .)
+
+
+state 35
+
+    (24) EXPR3 -> PIECE_ID EQUAL . _2_optional
+    (27) EXPR3 -> PIECE_ID EQUAL . _3_optional COMMA EXPR3
+    (25) _2_optional -> . STRING
+    (26) _2_optional -> .
+    (28) _3_optional -> . STRING
+    (29) _3_optional -> .
+    STRING          shift and go to state 44
+    $end            reduce using rule 26 (_2_optional -> .)
+    COMMA           reduce using rule 29 (_3_optional -> .)
+
+    _2_optional                    shift and go to state 42
+    _3_optional                    shift and go to state 43
+
+state 36
+
+    (31) EXPR3 -> PIECE_ID COMMA . EXPR3
+    (24) EXPR3 -> . PIECE_ID EQUAL _2_optional
+    (27) EXPR3 -> . PIECE_ID EQUAL _3_optional COMMA EXPR3
+    (30) EXPR3 -> . PIECE_ID NEWLINE
+    (31) EXPR3 -> . PIECE_ID COMMA EXPR3
+    PIECE_ID        shift and go to state 19
+
+    EXPR3                          shift and go to state 45
+
+state 37
+
+    (30) EXPR3 -> PIECE_ID NEWLINE .
+    $end            reduce using rule 30 (EXPR3 -> PIECE_ID NEWLINE .)
+
+
+state 38
+
+    (7) EXPR2 -> GAME_CONTROLS EQUAL . CONSTANT NEWLINE
+    (8) EXPR2 -> GAME_CONTROLS EQUAL . CONSTANT NEWLINE EXPR2 NEWLINE
+    (16) CONSTANT -> . _1_optional
+    (19) CONSTANT -> . KEY_CONTROL
+    (20) CONSTANT -> . KEY_CONSTANTS
+    (21) CONSTANT -> . ID
+    (22) CONSTANT -> . STRING
+    (23) CONSTANT -> . NUMBER
+    (17) _1_optional -> . STRING
+    (18) _1_optional -> .
+    KEY_CONTROL     shift and go to state 48
+    KEY_CONSTANTS   shift and go to state 49
+    ID              shift and go to state 50
+    STRING          shift and go to state 51
+    NUMBER          shift and go to state 52
+    NEWLINE         reduce using rule 18 (_1_optional -> .)
+
+    CONSTANT                       shift and go to state 46
+    _1_optional                    shift and go to state 47
+
+state 39
+
+    (6) EXPR1 -> NUMBER NUMBER . NEWLINE
+    NEWLINE         shift and go to state 53
+
+
+state 40
+
+    (34) EXPR5 -> PROCEDURE NEWLINE EXPR5 .
+    NEWLINE         reduce using rule 34 (EXPR5 -> PROCEDURE NEWLINE EXPR5 .)
+
+
+state 41
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR . F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    (36) F_ARGS -> . EXPR2
+    (7) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    (9) GAME_CONTROLS -> . INIT_BOARD
+    (10) GAME_CONTROLS -> . SCORE
+    (11) GAME_CONTROLS -> . HORIZON
+    (12) GAME_CONTROLS -> . ORIENTATION
+    (13) GAME_CONTROLS -> . SPEED_CONTROL
+    (14) GAME_CONTROLS -> . KEY_CONTROL
+    (15) GAME_CONTROLS -> . GAME_MODE
+    INIT_BOARD      shift and go to state 22
+    SCORE           shift and go to state 23
+    HORIZON         shift and go to state 24
+    ORIENTATION     shift and go to state 25
+    SPEED_CONTROL   shift and go to state 26
+    KEY_CONTROL     shift and go to state 27
+    GAME_MODE       shift and go to state 28
+
+    F_ARGS                         shift and go to state 54
+    EXPR2                          shift and go to state 55
+    GAME_CONTROLS                  shift and go to state 21
+
+state 42
+
+    (24) EXPR3 -> PIECE_ID EQUAL _2_optional .
+    $end            reduce using rule 24 (EXPR3 -> PIECE_ID EQUAL _2_optional .)
+
+
+state 43
+
+    (27) EXPR3 -> PIECE_ID EQUAL _3_optional . COMMA EXPR3
+    COMMA           shift and go to state 56
+
+
+state 44
+
+    (25) _2_optional -> STRING .
+    (28) _3_optional -> STRING .
+    $end            reduce using rule 25 (_2_optional -> STRING .)
+    COMMA           reduce using rule 28 (_3_optional -> STRING .)
+
+
+state 45
+
+    (31) EXPR3 -> PIECE_ID COMMA EXPR3 .
+    $end            reduce using rule 31 (EXPR3 -> PIECE_ID COMMA EXPR3 .)
+
+
+state 46
+
+    (7) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT . NEWLINE
+    (8) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT . NEWLINE EXPR2 NEWLINE
+    NEWLINE         shift and go to state 57
+
+
+state 47
+
+    (16) CONSTANT -> _1_optional .
+    NEWLINE         reduce using rule 16 (CONSTANT -> _1_optional .)
+
+
+state 48
+
+    (19) CONSTANT -> KEY_CONTROL .
+    NEWLINE         reduce using rule 19 (CONSTANT -> KEY_CONTROL .)
+
+
+state 49
+
+    (20) CONSTANT -> KEY_CONSTANTS .
+    NEWLINE         reduce using rule 20 (CONSTANT -> KEY_CONSTANTS .)
+
+
+state 50
+
+    (21) CONSTANT -> ID .
+    NEWLINE         reduce using rule 21 (CONSTANT -> ID .)
+
+
+state 51
+
+    (22) CONSTANT -> STRING .
+    (17) _1_optional -> STRING .
+  ! reduce/reduce conflict for NEWLINE resolved using rule 22 (CONSTANT -> STRING .)
+    NEWLINE         reduce using rule 22 (CONSTANT -> STRING .)
+
+
+state 52
+
+    (23) CONSTANT -> NUMBER .
+    NEWLINE         reduce using rule 23 (CONSTANT -> NUMBER .)
+
+
+state 53
+
+    (6) EXPR1 -> NUMBER NUMBER NEWLINE .
+    $end            reduce using rule 6 (EXPR1 -> NUMBER NUMBER NEWLINE .)
+
+
+state 54
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS . RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    RIGHT_PAR       shift and go to state 58
+
+
+state 55
+
+    (36) F_ARGS -> EXPR2 .
+    RIGHT_PAR       reduce using rule 36 (F_ARGS -> EXPR2 .)
+
+
+state 56
+
+    (27) EXPR3 -> PIECE_ID EQUAL _3_optional COMMA . EXPR3
+    (24) EXPR3 -> . PIECE_ID EQUAL _2_optional
+    (27) EXPR3 -> . PIECE_ID EQUAL _3_optional COMMA EXPR3
+    (30) EXPR3 -> . PIECE_ID NEWLINE
+    (31) EXPR3 -> . PIECE_ID COMMA EXPR3
+    PIECE_ID        shift and go to state 19
+
+    EXPR3                          shift and go to state 59
+
+state 57
+
+    (7) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE .
+    (8) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE . EXPR2 NEWLINE
+    (7) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    (9) GAME_CONTROLS -> . INIT_BOARD
+    (10) GAME_CONTROLS -> . SCORE
+    (11) GAME_CONTROLS -> . HORIZON
+    (12) GAME_CONTROLS -> . ORIENTATION
+    (13) GAME_CONTROLS -> . SPEED_CONTROL
+    (14) GAME_CONTROLS -> . KEY_CONTROL
+    (15) GAME_CONTROLS -> . GAME_MODE
+    $end            reduce using rule 7 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE .)
+    RIGHT_PAR       reduce using rule 7 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE .)
+    NEWLINE         reduce using rule 7 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE .)
+    INIT_BOARD      shift and go to state 22
+    SCORE           shift and go to state 23
+    HORIZON         shift and go to state 24
+    ORIENTATION     shift and go to state 25
+    SPEED_CONTROL   shift and go to state 26
+    KEY_CONTROL     shift and go to state 27
+    GAME_MODE       shift and go to state 28
+
+    GAME_CONTROLS                  shift and go to state 21
+    EXPR2                          shift and go to state 60
+
+state 58
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR . LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR
+    LEFT_CPAR       shift and go to state 61
+
+
+state 59
+
+    (27) EXPR3 -> PIECE_ID EQUAL _3_optional COMMA EXPR3 .
+    $end            reduce using rule 27 (EXPR3 -> PIECE_ID EQUAL _3_optional COMMA EXPR3 .)
+
+
+state 60
+
+    (8) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 . NEWLINE
+    NEWLINE         shift and go to state 62
+
+
+state 61
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR . NEWLINE FBODY NEWLINE RIGHT_CPAR
+    NEWLINE         shift and go to state 63
+
+
+state 62
+
+    (8) EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE .
+    $end            reduce using rule 8 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE .)
+    RIGHT_PAR       reduce using rule 8 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE .)
+    NEWLINE         reduce using rule 8 (EXPR2 -> GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE .)
+
+
+state 63
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE . FBODY NEWLINE RIGHT_CPAR
+    (37) FBODY -> . RETURN
+    (38) FBODY -> . ID EQUAL BEXPR
+    (39) FBODY -> . ID EQUAL AEXPR
+    (40) FBODY -> . BREAK
+    (41) FBODY -> . CONTINUE
+    (42) FBODY -> . EXPR2 NEWLINE FBODY
+    (7) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    (9) GAME_CONTROLS -> . INIT_BOARD
+    (10) GAME_CONTROLS -> . SCORE
+    (11) GAME_CONTROLS -> . HORIZON
+    (12) GAME_CONTROLS -> . ORIENTATION
+    (13) GAME_CONTROLS -> . SPEED_CONTROL
+    (14) GAME_CONTROLS -> . KEY_CONTROL
+    (15) GAME_CONTROLS -> . GAME_MODE
+    RETURN          shift and go to state 66
+    ID              shift and go to state 64
+    BREAK           shift and go to state 67
+    CONTINUE        shift and go to state 68
+    INIT_BOARD      shift and go to state 22
+    SCORE           shift and go to state 23
+    HORIZON         shift and go to state 24
+    ORIENTATION     shift and go to state 25
+    SPEED_CONTROL   shift and go to state 26
+    KEY_CONTROL     shift and go to state 27
+    GAME_MODE       shift and go to state 28
+
+    FBODY                          shift and go to state 65
+    EXPR2                          shift and go to state 69
+    GAME_CONTROLS                  shift and go to state 21
+
+state 64
+
+    (38) FBODY -> ID . EQUAL BEXPR
+    (39) FBODY -> ID . EQUAL AEXPR
+    EQUAL           shift and go to state 70
+
+
+state 65
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY . NEWLINE RIGHT_CPAR
+    NEWLINE         shift and go to state 71
+
+
+state 66
+
+    (37) FBODY -> RETURN .
+    NEWLINE         reduce using rule 37 (FBODY -> RETURN .)
+
+
+state 67
+
+    (40) FBODY -> BREAK .
+    NEWLINE         reduce using rule 40 (FBODY -> BREAK .)
+
+
+state 68
+
+    (41) FBODY -> CONTINUE .
+    NEWLINE         reduce using rule 41 (FBODY -> CONTINUE .)
+
+
+state 69
+
+    (42) FBODY -> EXPR2 . NEWLINE FBODY
+    NEWLINE         shift and go to state 72
+
+
+state 70
+
+    (38) FBODY -> ID EQUAL . BEXPR
+    (39) FBODY -> ID EQUAL . AEXPR
+    (53) BEXPR -> . OFF
+    (54) BEXPR -> . ON
+    (55) BEXPR -> . ID BOOL_OP ID
+    (56) BEXPR -> . NOT ID
+    (43) AEXPR -> . term
+    (44) AEXPR -> . AEXPR MINUS term
+    (45) AEXPR -> . AEXPR PLUS term
+    (46) term -> . factor
+    (47) term -> . term COMPARISON factor
+    (48) term -> . term MOD factor
+    (49) term -> . term DIVIDE factor
+    (50) term -> . term MULTIPLY factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    OFF             shift and go to state 76
+    ON              shift and go to state 77
+    ID              shift and go to state 73
+    NOT             shift and go to state 78
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    BEXPR                          shift and go to state 74
+    AEXPR                          shift and go to state 75
+    term                           shift and go to state 79
+    factor                         shift and go to state 80
+
+state 71
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE . RIGHT_CPAR
+    RIGHT_CPAR      shift and go to state 83
+
+
+state 72
+
+    (42) FBODY -> EXPR2 NEWLINE . FBODY
+    (37) FBODY -> . RETURN
+    (38) FBODY -> . ID EQUAL BEXPR
+    (39) FBODY -> . ID EQUAL AEXPR
+    (40) FBODY -> . BREAK
+    (41) FBODY -> . CONTINUE
+    (42) FBODY -> . EXPR2 NEWLINE FBODY
+    (7) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE
+    (8) EXPR2 -> . GAME_CONTROLS EQUAL CONSTANT NEWLINE EXPR2 NEWLINE
+    (9) GAME_CONTROLS -> . INIT_BOARD
+    (10) GAME_CONTROLS -> . SCORE
+    (11) GAME_CONTROLS -> . HORIZON
+    (12) GAME_CONTROLS -> . ORIENTATION
+    (13) GAME_CONTROLS -> . SPEED_CONTROL
+    (14) GAME_CONTROLS -> . KEY_CONTROL
+    (15) GAME_CONTROLS -> . GAME_MODE
+    RETURN          shift and go to state 66
+    ID              shift and go to state 64
+    BREAK           shift and go to state 67
+    CONTINUE        shift and go to state 68
+    INIT_BOARD      shift and go to state 22
+    SCORE           shift and go to state 23
+    HORIZON         shift and go to state 24
+    ORIENTATION     shift and go to state 25
+    SPEED_CONTROL   shift and go to state 26
+    KEY_CONTROL     shift and go to state 27
+    GAME_MODE       shift and go to state 28
+
+    EXPR2                          shift and go to state 69
+    FBODY                          shift and go to state 84
+    GAME_CONTROLS                  shift and go to state 21
+
+state 73
+
+    (55) BEXPR -> ID . BOOL_OP ID
+    (57) BOOL_OP -> . OR
+    (58) BOOL_OP -> . AND
+    OR              shift and go to state 86
+    AND             shift and go to state 87
+
+    BOOL_OP                        shift and go to state 85
+
+state 74
+
+    (38) FBODY -> ID EQUAL BEXPR .
+    NEWLINE         reduce using rule 38 (FBODY -> ID EQUAL BEXPR .)
+
+
+state 75
+
+    (39) FBODY -> ID EQUAL AEXPR .
+    (44) AEXPR -> AEXPR . MINUS term
+    (45) AEXPR -> AEXPR . PLUS term
+    NEWLINE         reduce using rule 39 (FBODY -> ID EQUAL AEXPR .)
+    MINUS           shift and go to state 88
+    PLUS            shift and go to state 89
+
+
+state 76
+
+    (53) BEXPR -> OFF .
+    NEWLINE         reduce using rule 53 (BEXPR -> OFF .)
+
+
+state 77
+
+    (54) BEXPR -> ON .
+    NEWLINE         reduce using rule 54 (BEXPR -> ON .)
+
+
+state 78
+
+    (56) BEXPR -> NOT . ID
+    ID              shift and go to state 90
+
+
+state 79
+
+    (43) AEXPR -> term .
+    (47) term -> term . COMPARISON factor
+    (48) term -> term . MOD factor
+    (49) term -> term . DIVIDE factor
+    (50) term -> term . MULTIPLY factor
+    MINUS           reduce using rule 43 (AEXPR -> term .)
+    PLUS            reduce using rule 43 (AEXPR -> term .)
+    NEWLINE         reduce using rule 43 (AEXPR -> term .)
+    RIGHT_PAR       reduce using rule 43 (AEXPR -> term .)
+    COMPARISON      shift and go to state 91
+    MOD             shift and go to state 92
+    DIVIDE          shift and go to state 93
+    MULTIPLY        shift and go to state 94
+
+
+state 80
+
+    (46) term -> factor .
+    COMPARISON      reduce using rule 46 (term -> factor .)
+    MOD             reduce using rule 46 (term -> factor .)
+    DIVIDE          reduce using rule 46 (term -> factor .)
+    MULTIPLY        reduce using rule 46 (term -> factor .)
+    MINUS           reduce using rule 46 (term -> factor .)
+    PLUS            reduce using rule 46 (term -> factor .)
+    NEWLINE         reduce using rule 46 (term -> factor .)
+    RIGHT_PAR       reduce using rule 46 (term -> factor .)
+
+
+state 81
+
+    (51) factor -> LEFT_PAR . AEXPR RIGHT_PAR
+    (43) AEXPR -> . term
+    (44) AEXPR -> . AEXPR MINUS term
+    (45) AEXPR -> . AEXPR PLUS term
+    (46) term -> . factor
+    (47) term -> . term COMPARISON factor
+    (48) term -> . term MOD factor
+    (49) term -> . term DIVIDE factor
+    (50) term -> . term MULTIPLY factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    AEXPR                          shift and go to state 95
+    term                           shift and go to state 79
+    factor                         shift and go to state 80
+
+state 82
+
+    (52) factor -> NUMBER .
+    COMPARISON      reduce using rule 52 (factor -> NUMBER .)
+    MOD             reduce using rule 52 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 52 (factor -> NUMBER .)
+    MULTIPLY        reduce using rule 52 (factor -> NUMBER .)
+    MINUS           reduce using rule 52 (factor -> NUMBER .)
+    PLUS            reduce using rule 52 (factor -> NUMBER .)
+    NEWLINE         reduce using rule 52 (factor -> NUMBER .)
+    RIGHT_PAR       reduce using rule 52 (factor -> NUMBER .)
+
+
+state 83
+
+    (35) PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR .
+    NEWLINE         reduce using rule 35 (PROCEDURE -> DEF ID LEFT_PAR F_ARGS RIGHT_PAR LEFT_CPAR NEWLINE FBODY NEWLINE RIGHT_CPAR .)
+
+
+state 84
+
+    (42) FBODY -> EXPR2 NEWLINE FBODY .
+    NEWLINE         reduce using rule 42 (FBODY -> EXPR2 NEWLINE FBODY .)
+
+
+state 85
+
+    (55) BEXPR -> ID BOOL_OP . ID
+    ID              shift and go to state 96
+
+
+state 86
+
+    (57) BOOL_OP -> OR .
+    ID              reduce using rule 57 (BOOL_OP -> OR .)
+
+
+state 87
+
+    (58) BOOL_OP -> AND .
+    ID              reduce using rule 58 (BOOL_OP -> AND .)
+
+
+state 88
+
+    (44) AEXPR -> AEXPR MINUS . term
+    (46) term -> . factor
+    (47) term -> . term COMPARISON factor
+    (48) term -> . term MOD factor
+    (49) term -> . term DIVIDE factor
+    (50) term -> . term MULTIPLY factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    term                           shift and go to state 97
+    factor                         shift and go to state 80
+
+state 89
+
+    (45) AEXPR -> AEXPR PLUS . term
+    (46) term -> . factor
+    (47) term -> . term COMPARISON factor
+    (48) term -> . term MOD factor
+    (49) term -> . term DIVIDE factor
+    (50) term -> . term MULTIPLY factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    term                           shift and go to state 98
+    factor                         shift and go to state 80
+
+state 90
+
+    (56) BEXPR -> NOT ID .
+    NEWLINE         reduce using rule 56 (BEXPR -> NOT ID .)
+
+
+state 91
+
+    (47) term -> term COMPARISON . factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    factor                         shift and go to state 99
+
+state 92
+
+    (48) term -> term MOD . factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    factor                         shift and go to state 100
+
+state 93
+
+    (49) term -> term DIVIDE . factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    factor                         shift and go to state 101
+
+state 94
+
+    (50) term -> term MULTIPLY . factor
+    (51) factor -> . LEFT_PAR AEXPR RIGHT_PAR
+    (52) factor -> . NUMBER
+    LEFT_PAR        shift and go to state 81
+    NUMBER          shift and go to state 82
+
+    factor                         shift and go to state 102
+
+state 95
+
+    (51) factor -> LEFT_PAR AEXPR . RIGHT_PAR
+    (44) AEXPR -> AEXPR . MINUS term
+    (45) AEXPR -> AEXPR . PLUS term
+    RIGHT_PAR       shift and go to state 103
+    MINUS           shift and go to state 88
+    PLUS            shift and go to state 89
+
+
+state 96
+
+    (55) BEXPR -> ID BOOL_OP ID .
+    NEWLINE         reduce using rule 55 (BEXPR -> ID BOOL_OP ID .)
+
+
+state 97
+
+    (44) AEXPR -> AEXPR MINUS term .
+    (47) term -> term . COMPARISON factor
+    (48) term -> term . MOD factor
+    (49) term -> term . DIVIDE factor
+    (50) term -> term . MULTIPLY factor
+    MINUS           reduce using rule 44 (AEXPR -> AEXPR MINUS term .)
+    PLUS            reduce using rule 44 (AEXPR -> AEXPR MINUS term .)
+    NEWLINE         reduce using rule 44 (AEXPR -> AEXPR MINUS term .)
+    RIGHT_PAR       reduce using rule 44 (AEXPR -> AEXPR MINUS term .)
+    COMPARISON      shift and go to state 91
+    MOD             shift and go to state 92
+    DIVIDE          shift and go to state 93
+    MULTIPLY        shift and go to state 94
+
+
+state 98
+
+    (45) AEXPR -> AEXPR PLUS term .
+    (47) term -> term . COMPARISON factor
+    (48) term -> term . MOD factor
+    (49) term -> term . DIVIDE factor
+    (50) term -> term . MULTIPLY factor
+    MINUS           reduce using rule 45 (AEXPR -> AEXPR PLUS term .)
+    PLUS            reduce using rule 45 (AEXPR -> AEXPR PLUS term .)
+    NEWLINE         reduce using rule 45 (AEXPR -> AEXPR PLUS term .)
+    RIGHT_PAR       reduce using rule 45 (AEXPR -> AEXPR PLUS term .)
+    COMPARISON      shift and go to state 91
+    MOD             shift and go to state 92
+    DIVIDE          shift and go to state 93
+    MULTIPLY        shift and go to state 94
+
+
+state 99
+
+    (47) term -> term COMPARISON factor .
+    COMPARISON      reduce using rule 47 (term -> term COMPARISON factor .)
+    MOD             reduce using rule 47 (term -> term COMPARISON factor .)
+    DIVIDE          reduce using rule 47 (term -> term COMPARISON factor .)
+    MULTIPLY        reduce using rule 47 (term -> term COMPARISON factor .)
+    MINUS           reduce using rule 47 (term -> term COMPARISON factor .)
+    PLUS            reduce using rule 47 (term -> term COMPARISON factor .)
+    NEWLINE         reduce using rule 47 (term -> term COMPARISON factor .)
+    RIGHT_PAR       reduce using rule 47 (term -> term COMPARISON factor .)
+
+
+state 100
+
+    (48) term -> term MOD factor .
+    COMPARISON      reduce using rule 48 (term -> term MOD factor .)
+    MOD             reduce using rule 48 (term -> term MOD factor .)
+    DIVIDE          reduce using rule 48 (term -> term MOD factor .)
+    MULTIPLY        reduce using rule 48 (term -> term MOD factor .)
+    MINUS           reduce using rule 48 (term -> term MOD factor .)
+    PLUS            reduce using rule 48 (term -> term MOD factor .)
+    NEWLINE         reduce using rule 48 (term -> term MOD factor .)
+    RIGHT_PAR       reduce using rule 48 (term -> term MOD factor .)
+
+
+state 101
+
+    (49) term -> term DIVIDE factor .
+    COMPARISON      reduce using rule 49 (term -> term DIVIDE factor .)
+    MOD             reduce using rule 49 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 49 (term -> term DIVIDE factor .)
+    MULTIPLY        reduce using rule 49 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 49 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 49 (term -> term DIVIDE factor .)
+    NEWLINE         reduce using rule 49 (term -> term DIVIDE factor .)
+    RIGHT_PAR       reduce using rule 49 (term -> term DIVIDE factor .)
+
+
+state 102
+
+    (50) term -> term MULTIPLY factor .
+    COMPARISON      reduce using rule 50 (term -> term MULTIPLY factor .)
+    MOD             reduce using rule 50 (term -> term MULTIPLY factor .)
+    DIVIDE          reduce using rule 50 (term -> term MULTIPLY factor .)
+    MULTIPLY        reduce using rule 50 (term -> term MULTIPLY factor .)
+    MINUS           reduce using rule 50 (term -> term MULTIPLY factor .)
+    PLUS            reduce using rule 50 (term -> term MULTIPLY factor .)
+    NEWLINE         reduce using rule 50 (term -> term MULTIPLY factor .)
+    RIGHT_PAR       reduce using rule 50 (term -> term MULTIPLY factor .)
+
+
+state 103
+
+    (51) factor -> LEFT_PAR AEXPR RIGHT_PAR .
+    COMPARISON      reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    MOD             reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    DIVIDE          reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    MULTIPLY        reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    MINUS           reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    PLUS            reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    NEWLINE         reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+    RIGHT_PAR       reduce using rule 51 (factor -> LEFT_PAR AEXPR RIGHT_PAR .)
+
+
+Conflicts:
+
+reduce/reduce conflict in state 51 resolved using rule CONSTANT -> STRING
+rejected rule (_1_optional -> STRING) in state 51
+Rule (_1_optional -> STRING) is never reduced

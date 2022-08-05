@@ -1,0 +1,4 @@
+run:
+	python CCLangLexer.py
+	python CCLangParser.py
+	python game.py

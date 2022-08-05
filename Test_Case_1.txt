@@ -1,0 +1,17 @@
+BOARD: 10 20
+
+CONTROLS:
+set_speed = 9
+
+PIECE: @l @t
+
+ACTION:
+mygame()
+
+FUNCTION:
+def mygame() {
+	x = 9
+	x = x - 2
+	set_speed = 7
+	return
+}
